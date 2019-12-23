@@ -1,0 +1,93 @@
+<!DOCTYPE >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Author" content="" />
+<title>律创</title>
+<link href="css/css_whir.css" rel="stylesheet" type="text/css" />
+<script src="Scripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+  var nav = '7'
+  var menu = '1'
+</script>
+</head>
+<body>
+<!--top-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div class="top">
+<!--	头部-->
+</div>
+<script language="javascript" type="text/javascript">
+ try{
+ document.getElementById("navId" + nav).className= "acur";
+ }catch(ex){}
+</script>
+<!--top end-->
+
+<!--banner-->
+<div class="banner"><img src="images/ban_news.jpg" /></div>
+<!--banner end-->
+<div class="main">
+    <div class="w1002">
+        <!--left-->
+        <div class="sidebar">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<h2 class="name"><span>新闻中心</span><em> /  news</em></h2>
+<ul class="sidemenu">
+    <li><a id="menuId1" href="news.html">律所动态</a></li>
+    <li><a id="menuId2" href="news.html">法律资讯</a></li>
+    <li><a id="menuId3" href="news.html">热点新闻</a></li>
+</ul>
+<script language="javascript" type="text/javascript">
+try{
+    document.getElementById("menuId" + menu).className= "aon";
+   }catch(ex){}
+</script><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<h2 class="name"><span>律师团队 </span><em> /  Lawyers</em></h2>
+<ul class="sidemenu">
+    <li><a id="menuId1" href="team.html">团队风貌</a></li>
+    <li><a id="menuId2" href="team_list.html">律师简介</a></li>
+</ul>
+<script language="javascript" type="text/javascript">
+try{
+    document.getElementById("menuId" + menu).className= "aon";
+   }catch(ex){}
+</script></div>
+        <!--left end-->
+        <!--right-->
+        <div class="mainContent" id="news">
+
+        <!--right end-->
+    </div>
+</div>
+<div class="space25"></div>
+<!--bottom-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div class="bottom btn">
+<!-- 尾部-->
+</div>
+<div class="foot"><div class="w1002">Copyright @ 2014 律创商标代理有限公司 all rightS reserved ED DY <a  href="http://" target="_blank"></a></div></div><!--bottom end-->
+<script type="text/javascript">
+    $(function () {
+        // 加载头部
+        $(".top").load("head.html")
+        // 加载尾部
+        $(".btn").load("end.html");
+        let search = window.location.search;
+          var id = search.substr(1,search.length);
+        $.get("/lawFirm/NewsServlet?param=newsAllId&id="+id, function (data) {
+            let json = JSON.parse(data);
+           var html=`<div class="nav">
+                  <h2>${json.classify} </h2>
+                <div class="current"><h1>您当前所在的位置：<a href="index.html">首页</a> &gt; <a href="news.html">新闻中心</a> &gt; <span>律所动态 </span></h1></div>
+            </div>
+            <div class="newsInfo"><h1 class="info_title">${json.name}</h1>
+            <div class="info_time">发布时间：${json.release_time}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击次数：${json.hits}次</div>
+            <div class="info_cont"><p>${json.content}</p></div>`
+            $("#news").append(html)
+         })
+    })
+</script>
+</div>
+</body>
+</html>
